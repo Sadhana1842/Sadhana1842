@@ -1,3 +1,2 @@
-BertTokenizer
-BertForSequenceClassification
+transformers
 torch
