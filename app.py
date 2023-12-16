@@ -41,8 +41,13 @@ def determine_overall_sentiment(sentence_sentiments):
         "Positive": sentence_sentiments.count("Positive")
     }
 
-    overall_sentiment = max(sentiment_counts, key=sentiment_counts.get)
-    return overall_sentiment
+    try:
+        overall_sentiment = analyze_sentiment(statement)
+        st.write(f"Overall Sentiment: {overall_sentiment}")
+    
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+
 
 def main():
     st.sidebar.title("Navigation")
