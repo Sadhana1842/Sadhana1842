@@ -6,7 +6,6 @@ import nltk
 # Download NLTK sentence tokenizer data
 nltk.download('punkt')
 
-@st.cache(allow_output_mutation=True)
 def load_model_and_tokenizer():
     # Load the model configuration
     model_config = 'distilbert-base-uncased'
@@ -17,7 +16,6 @@ def load_model_and_tokenizer():
 
     return model, tokenizer
 
-@st.cache
 def analyze_sentiment(statement, model, tokenizer):
     # Tokenize the statement into sentences
     sentences = nltk.sent_tokenize(statement)
@@ -37,7 +35,6 @@ def analyze_sentiment(statement, model, tokenizer):
 
     return overall_sentiment
 
-@st.cache
 def determine_overall_sentiment(sentence_sentiments):
     # Logic to determine overall sentiment based on individual sentence sentiments
     # You can customize this logic based on your requirements
