@@ -63,4 +63,20 @@ def main():
 
     elif page == "Sentiment Analysis":
         st.title("Sentiment Analysis")
-        st.
+        st.write("Enter a statement to analyze its sentiment.")
+
+        statement = st.text_area("Enter your statement:")
+        submit_button = st.button("Submit")
+
+        # Load the model and tokenizer
+        model, tokenizer = load_model_and_tokenizer()
+
+        if submit_button:
+            if statement:
+                overall_sentiment = analyze_sentiment(statement, model, tokenizer)
+                st.write(f"Overall Sentiment: {overall_sentiment}")
+            else:
+                st.warning("Please enter a statement.")
+
+if __name__ == "__main__":
+    main()
