@@ -1,5 +1,5 @@
 import streamlit as st
-from transformers import BertTokenizer, BertForSequenceClassification
+from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
 import torch
 import nltk
 
@@ -9,11 +9,11 @@ nltk.download('punkt')
 @st.cache(allow_output_mutation=True)
 def load_model_and_tokenizer():
     # Load the model configuration
-    model_config = 'ahmedrachid/FinancialBERT-Sentiment-Analysis'
-    model = BertForSequenceClassification.from_pretrained(model_config, num_labels=3)
+    model_config = 'distilbert-base-uncased'
+    model = DistilBertForSequenceClassification.from_pretrained(model_config, num_labels=3)
 
     # Load the tokenizer separately
-    tokenizer = BertTokenizer.from_pretrained(model_config)
+    tokenizer = DistilBertTokenizer.from_pretrained(model_config)
 
     return model, tokenizer
 
