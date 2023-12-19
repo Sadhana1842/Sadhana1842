@@ -7,10 +7,14 @@ import nltk
 nltk.download('punkt')
 
 @st.cache(allow_output_mutation=True)
-def load_model():
-    # Load the pre-trained model
-    model = BertForSequenceClassification.from_pretrained('ahmedrachid/FinancialBERT-Sentiment-Analysis', num_labels=3)
-    tokenizer = BertTokenizer.from_pretrained('ahmedrachid/FinancialBERT-Sentiment-Analysis')
+def load_model_and_tokenizer():
+    # Load the model and tokenizer configurations
+    model_config = 'ahmedrachid/FinancialBERT-Sentiment-Analysis'
+    tokenizer_config = 'ahmedrachid/FinancialBERT-Sentiment-Analysis'
+
+    model = BertForSequenceClassification.from_pretrained(model_config, num_labels=3)
+    tokenizer = BertTokenizer.from_pretrained(tokenizer_config)
+
     return model, tokenizer
 
 @st.cache
@@ -28,18 +32,14 @@ def analyze_sentiment(statement, model, tokenizer):
         sentiment_mapping = {0: "Negative", 1: "Neutral", 2: "Positive"}
         sentence_sentiments.append(sentiment_mapping[predictions.item()])
 
-    # Determine the overall sentiment of the entire statement
+  
     overall_sentiment = determine_overall_sentiment(sentence_sentiments)
 
     return overall_sentiment
 
 @st.cache
 def determine_overall_sentiment(sentence_sentiments):
-    # Logic to determine overall sentiment based on individual sentence sentiments
-    # You can customize this logic based on your requirements
-    # For example, you might consider the majority sentiment or a weighted average
 
-    # For simplicity, here we consider the majority sentiment
     sentiment_counts = {
         "Negative": sentence_sentiments.count("Negative"),
         "Neutral": sentence_sentiments.count("Neutral"),
@@ -65,7 +65,7 @@ def main():
         submit_button = st.button("Submit")
 
         # Load the model and tokenizer
-        model, tokenizer = load_model()
+        model, tokenizer = load_model_and_tokenizer()
 
         if submit_button:
             if statement:
