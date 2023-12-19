@@ -3,14 +3,18 @@ from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 import nltk
 
-# Load the pre-trained model
-model = BertForSequenceClassification.from_pretrained('ahmedrachid/FinancialBERT-Sentiment-Analysis', num_labels=3)
-tokenizer = BertTokenizer.from_pretrained('ahmedrachid/FinancialBERT-Sentiment-Analysis')
-
 # Download NLTK sentence tokenizer data
 nltk.download('punkt')
 
-def analyze_sentiment(statement):
+@st.cache(allow_output_mutation=True)
+def load_model():
+    # Load the pre-trained model
+    model = BertForSequenceClassification.from_pretrained('ahmedrachid/FinancialBERT-Sentiment-Analysis', num_labels=3)
+    tokenizer = BertTokenizer.from_pretrained('ahmedrachid/FinancialBERT-Sentiment-Analysis')
+    return model, tokenizer
+
+@st.cache
+def analyze_sentiment(statement, model, tokenizer):
     # Tokenize the statement into sentences
     sentences = nltk.sent_tokenize(statement)
 
@@ -29,6 +33,7 @@ def analyze_sentiment(statement):
 
     return overall_sentiment
 
+@st.cache
 def determine_overall_sentiment(sentence_sentiments):
     # Logic to determine overall sentiment based on individual sentence sentiments
     # You can customize this logic based on your requirements
@@ -41,13 +46,8 @@ def determine_overall_sentiment(sentence_sentiments):
         "Positive": sentence_sentiments.count("Positive")
     }
 
-    try:
-        overall_sentiment = analyze_sentiment(statement)
-        st.write(f"Overall Sentiment: {overall_sentiment}")
-    
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
-
+    overall_sentiment = max(sentiment_counts, key=sentiment_counts.get)
+    return overall_sentiment
 
 def main():
     st.sidebar.title("Navigation")
@@ -64,13 +64,15 @@ def main():
         statement = st.text_area("Enter your statement:")
         submit_button = st.button("Submit")
 
+        # Load the model and tokenizer
+        model, tokenizer = load_model()
+
         if submit_button:
             if statement:
-                overall_sentiment = analyze_sentiment(statement)
+                overall_sentiment = analyze_sentiment(statement, model, tokenizer)
                 st.write(f"Overall Sentiment: {overall_sentiment}")
             else:
                 st.warning("Please enter a statement.")
 
 if __name__ == "__main__":
     main()
-
