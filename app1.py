@@ -98,10 +98,10 @@ def main():
         if submit_excel_button:
             selected_row = excel_data[(excel_data["Year"] == selected_year) & (excel_data["Date"] == selected_date)].iloc[0]
             statement = selected_row["Statement"]
-            negative_percentage=excel_data["Mean Negative"]
-            positive_percentage=excel_data["Mean Positive"]
-            neutral_percentage=excel_data["Mean Neutral"]
-            overall_sentiment=excel_data["Tone"]
+            negative_percentage=selected_row["Mean Negative"]
+            positive_percentage=selected_row["Mean Positive"]
+            neutral_percentage=selected_row["Mean Neutral"]
+            overall_sentiment=selected_row["Tone"]
 
             st.write(f"Statement: {statement}")
             st.write(f"Negative Percentage: {negative_percentage:.2f}%")
