@@ -8,7 +8,7 @@ import pandas as pd
 nltk.download('punkt')
 
 # Load the Excel sheet
-excel_path = "C:\Users\Admin\Desktop\fomc_final_sheets.xlsx"
+excel_path = "fomc_final_sheets.xlsx"
 excel_data = pd.read_excel(excel_path)
 
 def load_model_and_tokenizer():
