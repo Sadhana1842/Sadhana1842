@@ -56,12 +56,12 @@ def analyze_sentiment(statement, model, tokenizer):
 
 def main():
     st.sidebar.title("Navigation Bar")
-    page = st.sidebar.radio("Select a page", ["Home", "Sentiment Analysis", "Sentiments of statements etween years 2006 and 2023"])
+    page = st.sidebar.radio("Select a page", ["Home", "Sentiment Analysis", "Sentiments of statements between years 2006 and 2023"])
     text="""Dr.Narendra Regmi
-            UW-Whitewater
-            Assistant Professor
-            Macroeconomics, International Trade, Economic Growth
-            Wisconsin University"""
+    UW-Whitewater
+    Assistant Professor
+    Macroeconomics, International Trade, Economic Growth
+    Wisconsin University"""
     st.sidebar.text(text)
 
     if page == "Home":
