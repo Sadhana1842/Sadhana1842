@@ -88,7 +88,7 @@ def main():
             else:
                 st.warning("Please enter a statement.")
 
-    elif page == "Excel":
+    elif page == "Sentiments of statements between years 2006 and 2023":
         st.title("Excel Data Analysis")
         st.write("Select a year and date to display sentiment analysis from the Excel sheet.")
 
