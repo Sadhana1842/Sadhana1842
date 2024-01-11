@@ -55,15 +55,21 @@ def analyze_sentiment(statement, model, tokenizer):
     return negative_percentage, neutral_percentage, positive_percentage, overall_sentiment
 
 def main():
-    st.sidebar.title("Navigation")
-    page = st.sidebar.radio("Select a page", ["Home", "Sentiment Analysis", "Excel"])
+    st.sidebar.title("Navigation Bar")
+    page = st.sidebar.radio("Select a page", ["Home", "Sentiment Analysis", "Sentiments of statements etween years 2006 and 2023"])
+    text="""Dr.Narendra Regmi
+            UW-Whitewater
+            Assistant Professor
+            Macroeconomics, International Trade, Economic Growth
+            Wisconsin University"""
+    st.sidebar.text(text)
 
     if page == "Home":
         st.title("Welcome to the Sentiment Analysis App")
         st.write("Select a page from the sidebar.")
 
     elif page == "Sentiment Analysis":
-        st.title("Sentiment Analysis")
+        st.title("FOMC statement tone estimator")
         st.write("Enter a statement to analyze its sentiment.")
 
         statement = st.text_area("Enter your statement:")
