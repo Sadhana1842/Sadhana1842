@@ -57,7 +57,8 @@ def analyze_sentiment(statement, model, tokenizer):
 def main():
     st.sidebar.title("Navigation Bar")
     page = st.sidebar.radio("Select a page", ["Home", "FOMC statement Tone estimator", "FOMC statement sentiments (Years 2006 to 2023)"])
-    text="""Dr.Narendra Regmi
+    text="""
+    Dr.Narendra Regmi
     UW-Whitewater
     Assistant Professor
     Macroeconomics, 
