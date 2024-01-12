@@ -56,19 +56,21 @@ def analyze_sentiment(statement, model, tokenizer):
 
 def main():
     st.sidebar.title("Navigation Bar")
-    page = st.sidebar.radio("Select a page", ["Home", "Sentiment Analysis", "Sentiments of statements between years 2006 and 2023"])
+    page = st.sidebar.radio("Select a page", ["Home", "FOMC statement Tone estimator", "FOMC statement sentiments (Years 2006 and 2023)"])
     text="""Dr.Narendra Regmi
     UW-Whitewater
     Assistant Professor
-    Macroeconomics, International Trade, Economic Growth
+    Macroeconomics, 
+    International Trade, 
+    Economic Growth
     Wisconsin University"""
     st.sidebar.text(text)
 
     if page == "Home":
-        st.title("Welcome to the Sentiment Analysis App")
+        st.title("Welcome to the FOMC Statement Tone Estimator App")
         st.write("Select a page from the sidebar.")
 
-    elif page == "Sentiment Analysis":
+    elif page == "FOMC statement Tone estimator":
         st.title("FOMC statement tone estimator")
         st.write("Enter a statement to analyze its sentiment.")
 
@@ -88,9 +90,9 @@ def main():
             else:
                 st.warning("Please enter a statement.")
 
-    elif page == "Sentiments of statements between years 2006 and 2023":
-        st.title("Sentiments of statements between years 2006 and 2023")
-        st.write("Select a year and date to display sentiment analysis from the Excel sheet.")
+    elif page == "FOMC statement sentiments (Years 2006 and 2023)":
+        st.title("FOMC statement sentiments (Years 2006 and 2023)")
+        st.write("Select a year and date to display sentiment analysis")
 
         # Dropdown for selecting the year
         selected_year = st.selectbox("Select Year", excel_data["Year"].unique())
