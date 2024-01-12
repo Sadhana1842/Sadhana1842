@@ -56,7 +56,7 @@ def analyze_sentiment(statement, model, tokenizer):
 
 def main():
     st.sidebar.title("Navigation Bar")
-    page = st.sidebar.radio("Select a page", ["Home", "FOMC statement Tone estimator", "FOMC statement sentiments (Years 2006 and 2023)"])
+    page = st.sidebar.radio("Select a page", ["Home", "FOMC statement Tone estimator", "FOMC statement sentiments (Years 2006 to 2023)"])
     text="""Dr.Narendra Regmi
     UW-Whitewater
     Assistant Professor
@@ -90,8 +90,8 @@ def main():
             else:
                 st.warning("Please enter a statement.")
 
-    elif page == "FOMC statement sentiments (Years 2006 and 2023)":
-        st.title("FOMC statement sentiments (Years 2006 and 2023)")
+    elif page == "FOMC statement sentiments (Years 2006 to 2023)":
+        st.title("FOMC statement sentiments (Years 2006 to 2023)")
         st.write("Select a year and date to display sentiment analysis")
 
         # Dropdown for selecting the year
