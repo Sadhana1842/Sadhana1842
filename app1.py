@@ -6,6 +6,8 @@ import pandas as pd
 
 # Download NLTK sentence tokenizer data
 nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')  # Ensures additional dependencies are available
+
 
 # Load the Excel sheet
 excel_path = "fomc_final_sheets.xlsx"
