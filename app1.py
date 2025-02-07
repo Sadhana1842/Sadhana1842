@@ -53,10 +53,10 @@ def analyze_sentiment(statement, model, tokenizer):
 def main():
     st.sidebar.write("Welcome to the FOMC Statement Tone Estimator App")
     page = st.sidebar.radio("Select a page", ["Home", "FOMC statement Tone estimator", "FOMC statement sentiments (Years 2006 to 2023)"])
-    st.write("Dr. Narendra Regmi")
-    st.write("Assistant Professor")
-    st.write("Macroeconomics, International trade, Economic growth")
-    st.write("Wisconsin University")
+    st.sidebar.write("Dr. Narendra Regmi")
+    st.sidebar.write("Assistant Professor")
+    st.sidebar.write("Macroeconomics, International trade, Economic growth")
+    st.sidebar.write("Wisconsin University")
 
     if page == "Home":
         st.title("FOMC Statement Tone Estimator App")
