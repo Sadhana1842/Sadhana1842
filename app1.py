@@ -1,13 +1,7 @@
 import streamlit as st
 from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
 import torch
-import nltk
 import pandas as pd
-
-# Download NLTK sentence tokenizer data
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')  # Ensures additional dependencies are available
-
 
 # Load the Excel sheet
 excel_path = "fomc_final_sheets.xlsx"
@@ -38,8 +32,8 @@ def determine_overall_sentiment(sentence_sentiments):
     return sentiment_counts["Negative"], sentiment_counts["Neutral"], sentiment_counts["Positive"], overall_sentiment
 
 def analyze_sentiment(statement, model, tokenizer):
-    # Tokenize the statement into sentences
-    sentences = nltk.sent_tokenize(statement)
+    # Split the statement into sentences using '.' as the delimiter
+    sentences = [s.strip() for s in statement.split('.') if s.strip()]  # Avoid empty sentences
 
     # Analyze the sentiment of each sentence
     sentence_sentiments = []
@@ -59,7 +53,6 @@ def analyze_sentiment(statement, model, tokenizer):
 def main():
     st.sidebar.title("Navigation Bar")
     page = st.sidebar.radio("Select a page", ["Home", "FOMC statement Tone estimator", "FOMC statement sentiments (Years 2006 to 2023)"])
-
 
     if page == "Home":
         st.title("Welcome to the FOMC Statement Tone Estimator App")
@@ -101,10 +94,10 @@ def main():
         if submit_excel_button:
             selected_row = excel_data[(excel_data["Year"] == selected_year) & (excel_data["Date"] == selected_date)].iloc[0]
             statement = selected_row["Statement"]
-            negative_percentage=selected_row["Mean Negative"]
-            positive_percentage=selected_row["Mean Positive"]
-            neutral_percentage=selected_row["Mean Neutral"]
-            overall_sentiment=selected_row["Tone"]
+            negative_percentage = selected_row["Mean Negative"]
+            positive_percentage = selected_row["Mean Positive"]
+            neutral_percentage = selected_row["Mean Neutral"]
+            overall_sentiment = selected_row["Tone"]
 
             st.write(f"Statement: {statement}")
             st.write(f"Negative Percentage: {negative_percentage:.2f}%")
